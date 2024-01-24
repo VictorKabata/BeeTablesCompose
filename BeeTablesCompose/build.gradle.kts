@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("maven-publish")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin)
+    id(libs.plugins.maven.get().pluginId)
 }
 
 android {
