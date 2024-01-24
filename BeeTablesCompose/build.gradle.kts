@@ -33,7 +33,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.multiplatform)
-    alias(libs.plugins.nativeCocoapod)
+    // alias(libs.plugins.nativeCocoapod)
 
     alias(libs.plugins.compose)
 
@@ -47,7 +47,7 @@ kotlin {
         publishLibraryVariants("release", "debug")
     }
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
+    /*val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         when {
             System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
             System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
@@ -64,7 +64,7 @@ kotlin {
             baseName = "BeeTablesCompose"
             isStatic = false
         }
-    }
+    }*/
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
@@ -90,15 +90,15 @@ kotlin {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         minSdk = 21
     }
     namespace = "com.breens.beetablescompose"
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
