@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-
 /*
  * Copyright 2023 Breens Mbaka
  *
@@ -18,7 +16,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.multiplatform)
-    alias(libs.plugins.nativeCocoapod)
+    // alias(libs.plugins.nativeCocoapod)
 
     alias(libs.plugins.compose)
 
@@ -30,7 +28,9 @@ kotlin {
 
     androidTarget()
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
+    jvm("desktop")
+
+    /*val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         when {
             System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
             System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
@@ -48,7 +48,7 @@ kotlin {
             baseName = "BeeTablesCompose"
             isStatic = false
         }
-    }
+    }*/
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
