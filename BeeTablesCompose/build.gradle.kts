@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 /*
  * Copyright 2023 Breens Mbaka
  *
@@ -16,6 +18,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.multiplatform)
+    alias(libs.plugins.nativeCocoapod)
 
     alias(libs.plugins.compose)
 
@@ -27,7 +30,7 @@ kotlin {
 
     androidTarget()
 
-    /*val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         when {
             System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
             System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
@@ -36,7 +39,8 @@ kotlin {
     iosTarget("ios") {}
 
     cocoapods {
-        summary = "Some description for the Shared Module"
+        summary =
+            "A Compose UI data table library which allows developers to seamless integrate visually appealing and customizable tables to their Android apps or IOS apps."
         homepage = "https://github.com/Breens-Mbaka/BeeTablesCompose"
         version = "1.0.2"
         ios.deploymentTarget = "14.1"
@@ -44,7 +48,7 @@ kotlin {
             baseName = "BeeTablesCompose"
             isStatic = false
         }
-    }*/
+    }
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
@@ -59,13 +63,6 @@ kotlin {
             implementation(kotlin("test"))
         }
 
-        sourceSets["androidInstrumentedTest"].dependencies {
-            implementation(libs.androidX.jUnit)
-            implementation(libs.espresso)
-        }
-
-        // sourceSets["androidUnitTest"].dependencies {}
-
     }
 }
 
@@ -79,16 +76,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-
-    buildTypes {
-        getByName("debug") {}
-
-        getByName("release") {
-            isMinifyEnabled = false
-        }
     }
 
     publishing {
