@@ -16,19 +16,16 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.multiplatform)
-    // alias(libs.plugins.nativeCocoapod)
 
     alias(libs.plugins.compose)
 
-    // id("maven-publish")
+    id("maven-publish")
 }
 
 kotlin {
     kotlin.applyDefaultHierarchyTemplate()
 
-    androidTarget {
-        publishLibraryVariants("release", "debug")
-    }
+    androidTarget()
 
     /*val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         when {
@@ -93,9 +90,16 @@ android {
             isMinifyEnabled = false
         }
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
-/*afterEvaluate {
+afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("release") {
@@ -106,4 +110,4 @@ android {
             }
         }
     }
-}*/
+}
